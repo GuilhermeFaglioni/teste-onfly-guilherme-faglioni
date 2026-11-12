@@ -43,13 +43,13 @@ PYTHONPATH=src python -m onfly_report --input data/reservas_hoteis.csv --rates d
 
 ### Ciclo por tarefa
 1. **Investigar** — orquestrador dispara `investigador` (um escopo por agente; podem rodar em paralelo).
-2. **Especificar** — orquestrador cria `specs/NNN-<slug>.md` a partir de `specs/TEMPLATE.md` e registra em `specs/README.md` (status `draft` → `approved`).
+2. **Especificar** — orquestrador cria `specs/NNN-<slug>.md` a partir de `specs/TEMPLATE.md`, registra em `specs/README.md` e abre uma issue no GitHub (label `spec`) com o conteúdo da spec, vinculando o link na spec e no registro (status `draft` → `approved`).
 3. **Implementar** — dispara `implementador` com o caminho da spec. Ele:
    a. escreve os testes novos propostos e prova o **RED** (registra a saída na spec);
    b. faz a mudança mínima até **GREEN** (testes novos + imutáveis esperados);
    c. roda a suíte inteira + `ruff`; registra evidências na spec.
 4. **Revisar** — dispara `revisor` com a spec. Reprovação volta ao passo 3 com os apontamentos.
-5. **Fechar** — orquestrador marca `done` no registro, atualiza `entrega/README-ENTREGA.md`, faz commit (um por spec).
+5. **Fechar** — orquestrador marca `done` no registro, atualiza `entrega/README-ENTREGA.md`, faz commit (um por spec) em branch `spec/NNN-<slug>`, abre PR com `Closes #<issue>`.
 
 ### Escalonamento
 Subagents devolvem `STATUS: ESCALATE` com motivo quando: a spec é ambígua/contradiz o README; a correção exige
