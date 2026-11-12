@@ -1,6 +1,6 @@
 # SPEC-001 — Só CONFIRMED é faturável
 
-- **Status:** draft
+- **Status:** approved
 - **Issue:** [#1](https://github.com/GuilhermeFaglioni/teste-onfly-guilherme-faglioni/issues/1)
 - **Autor:** orquestrador
 - **Implementador / Revisor:** —

@@ -1,6 +1,6 @@
 # SPEC-002 — Noites pela diferença de datas
 
-- **Status:** draft
+- **Status:** approved
 - **Issue:** [#2](https://github.com/GuilhermeFaglioni/teste-onfly-guilherme-faglioni/issues/2)
 - **Autor:** orquestrador
 - **Implementador / Revisor:** —

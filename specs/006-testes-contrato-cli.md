@@ -1,6 +1,6 @@
 # SPEC-006 — Testes de contrato da CLI e exatidão
 
-- **Status:** draft
+- **Status:** approved
 - **Issue:** [#6](https://github.com/GuilhermeFaglioni/teste-onfly-guilherme-faglioni/issues/6)
 - **Autor:** orquestrador
 - **Implementador / Revisor:** —

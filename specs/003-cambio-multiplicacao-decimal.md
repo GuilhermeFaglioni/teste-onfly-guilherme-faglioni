@@ -1,6 +1,6 @@
 # SPEC-003 — Câmbio: amount * rate em Decimal
 
-- **Status:** draft
+- **Status:** approved
 - **Issue:** [#3](https://github.com/GuilhermeFaglioni/teste-onfly-guilherme-faglioni/issues/3)
 - **Autor:** orquestrador
 - **Implementador / Revisor:** —

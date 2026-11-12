@@ -1,6 +1,6 @@
 # SPEC-004 — top_hotels ordenado por total desc, hotel_id asc
 
-- **Status:** draft
+- **Status:** approved
 - **Issue:** [#4](https://github.com/GuilhermeFaglioni/teste-onfly-guilherme-faglioni/issues/4)
 - **Autor:** orquestrador
 - **Implementador / Revisor:** —

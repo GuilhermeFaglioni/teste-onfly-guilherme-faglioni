@@ -1,6 +1,6 @@
 # SPEC-005 — Ler todas as reservas do CSV
 
-- **Status:** draft
+- **Status:** approved
 - **Issue:** [#5](https://github.com/GuilhermeFaglioni/teste-onfly-guilherme-faglioni/issues/5)
 - **Autor:** orquestrador
 - **Implementador / Revisor:** —
