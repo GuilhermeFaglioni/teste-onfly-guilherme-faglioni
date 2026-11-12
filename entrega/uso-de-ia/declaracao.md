@@ -77,4 +77,6 @@
 _A preencher._
 
 ## Sessões exportadas
-- `sessao-01.md` — sessão principal (definição do fluxo e correções).
+_Pendente._ Nenhuma sessão foi exportada até agora. As exportações (`/export`) serão feitas ao final do trabalho e listadas aqui:
+- sessão principal (orquestradora);
+- subagents: 3 investigadores (Fase 2) e os implementadores/revisores da Fase 3.
