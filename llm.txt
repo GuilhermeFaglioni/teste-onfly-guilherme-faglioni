@@ -1,0 +1,40 @@
+# onfly-report — consolidador de reservas de hotel (teste técnico Onfly)
+> CLI Python 3.11 (stdlib) que lê CSV de reservas + taxas de câmbio e gera report.json consolidado.
+> Fonte da verdade: README.md. Regras de agentes: CLAUDE.md. Contrato do JSON: docs/SCHEMA.md.
+
+## Raiz
+- README.md: enunciado, regras de negócio, contrato da CLI, amostra de validação, entrega. NÃO editar.
+- CLAUDE.md: restrições, fluxo agêntico SDD+TDD, papéis e escalonamento.
+- llm.txt: este mapa.
+- pyproject.toml: metadados, config de ruff e pytest (pythonpath=src).
+- requirements.txt (sem deps runtime) / requirements-dev.txt (pytest, ruff).
+
+## src/onfly_report/ — código da CLI (onde ficam os defeitos)
+- __main__.py: entrada `python -m onfly_report`.
+- cli.py: argparse (build_parser) e main(); orquestra leitura → relatório → escrita; exit codes.
+- models.py: dataclasses RawRow (linha crua) e Reservation (tipada).
+- exceptions.py: DomainError, InputFileError.
+- logging_config.py: configure_logging.
+- repositories/csv_reservation_repository.py: CsvReservationRepository, lê reservas do CSV.
+- repositories/csv_rate_repository.py: CsvRateRepository, lê taxas moeda → Decimal.
+- services/row_parser.py: RowParser, converte RawRow → Reservation (datas, ints, Decimal).
+- services/status_policy.py: is_billable(status) — só CONFIRMED.
+- services/stay_calculator.py: calculate_room_nights(checkin, checkout, rooms).
+- services/currency_converter.py: convert_to_brl(amount, currency, rates).
+- services/report_builder.py: ReportBuilder (summary, by_month, top_hotels) e format_money.
+
+## tests/
+- helpers.py, test_currency.py, test_nights.py, test_regression_report.py, test_status_rules.py, test_top_hotels.py: FORNECIDOS, IMUTÁVEIS.
+- test_schema_contract.py: contrato de schema (docs/SCHEMA.md); só muda com escalonamento.
+- test_*_extra.py / novos: testes TDD criados por specs.
+
+## data/
+- reservas_hoteis.csv, taxas_cambio.csv: IMUTÁVEIS.
+- exemplo-validacao.csv: amostra com resultado esperado no README.
+
+## docs/SCHEMA.md — contrato do report.json e da CLI (preservação obrigatória).
+## specs/ — SDD: TEMPLATE.md, README.md (registro), NNN-<slug>.md (uma por tarefa).
+## .claude/agents/ — subagents: investigador (leitura), implementador (TDD em src/), revisor (leitura).
+## .github/workflows/ci.yml — CI: guarda de imutáveis + spec obrigatória, ruff, schema, pytest, smoke da CLI.
+## entrega/ — README-ENTREGA.md e uso-de-ia/ (declaracao.md, sessões exportadas).
+## output/ — relatórios gerados (ignorado no git, exceto .gitkeep).

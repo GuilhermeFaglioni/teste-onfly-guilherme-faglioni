@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  guard:
+    name: Arquivos imutáveis e specs
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Testes fornecidos, dados e contrato não podem mudar
+        run: |
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "$CHANGED"
+          PROTECTED='^(tests/(helpers|test_currency|test_nights|test_regression_report|test_status_rules|test_top_hotels)\.py|data/reservas_hoteis\.csv|data/taxas_cambio\.csv)$'
+          if echo "$CHANGED" | grep -E "$PROTECTED"; then
+            echo "::error::PR altera arquivo protegido pelo README"; exit 1
+          fi
+          if echo "$CHANGED" | grep -E '^(docs/SCHEMA\.md|tests/test_schema_contract\.py)$'; then
+            echo "::warning::Contrato de schema alterado — exige revisão humana"
+          fi
+          if echo "$CHANGED" | grep -q '^src/' && ! echo "$CHANGED" | grep -qE '^specs/[0-9]{3}-.*\.md$'; then
+            echo "::error::PR altera src/ sem spec em specs/NNN-*.md"; exit 1
+          fi
+
+  test:
+    name: Lint, schema e testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: Ruff
+        run: ruff check src tests
+      - name: Contrato do schema
+        run: pytest -q tests/test_schema_contract.py
+      - name: Suíte completa
+        run: pytest -q
+      - name: Smoke da CLI (amostra e dataset)
+        run: |
+          PYTHONPATH=src python -m onfly_report --input data/exemplo-validacao.csv --rates data/taxas_cambio.csv --output output/exemplo.json
+          PYTHONPATH=src python -m onfly_report --input data/reservas_hoteis.csv --rates data/taxas_cambio.csv --output output/report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reports
+          path: output/*.json
