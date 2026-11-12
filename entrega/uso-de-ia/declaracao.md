@@ -79,7 +79,7 @@
 **O que a IA fez:**
 - Exportou a sessão pelo app (zip em `~/Downloads`) e inspecionou o conteúdo: a transcrição principal e a de cada subagent, em JSONL, com prompt, comandos, resultados e relatório final.
 - Comparou com o `/export` da CLI que eu testei, que mostra só a resposta final de cada subagent.
-- Encontrou o e-mail do candidato em 2 trechos da transcrição principal. Ele vem do contexto injetado pelo app e precisa ser removido antes de publicar.
+- Encontrou o e-mail do candidato em 2 trechos da transcrição principal. Ele vem do contexto injetado pelo app. Por decisão do candidato, o e-mail é mantido no export.
 - Registrou a exportação dupla no `CLAUDE.md` e nesta declaração.
 
 **O que eu fiz:**
