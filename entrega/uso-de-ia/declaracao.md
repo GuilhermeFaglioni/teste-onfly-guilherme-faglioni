@@ -77,6 +77,8 @@
 _A preencher._
 
 ## Sessões exportadas
-_Pendente._ Nenhuma sessão foi exportada até agora. As exportações (`/export`) serão feitas ao final do trabalho e listadas aqui:
-- sessão principal (orquestradora);
-- subagents: 3 investigadores (Fase 2) e os implementadores/revisores da Fase 3.
+_Pendente._ Nenhuma sessão foi exportada até agora. Ao final do trabalho serão feitas duas exportações complementares, em `entrega/uso-de-ia/`:
+- `sessao-01.md` — `/export` do Claude Code: sessão principal (orquestradora) em texto legível. Não inclui subagents.
+- `sessao-01-completa/` — export do app (menu da sessão › Export), descompactado: transcrição principal e de cada subagent em JSONL nativo (`subagents/agent-<id>.jsonl` + `.meta.json` com tipo e tarefa).
+
+Subagents previstos: 3 investigadores (Fase 2) e os implementadores/revisores da Fase 3.
