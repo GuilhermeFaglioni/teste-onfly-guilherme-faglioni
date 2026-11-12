@@ -74,6 +74,48 @@
 - Autorizei o commit e o push.
 
 ## Fase 3 — Implementação (TDD)
+
+### Validação da exportação de sessões
+**O que a IA fez:**
+- Exportou a sessão pelo app (zip em `~/Downloads`) e inspecionou o conteúdo: a transcrição principal e a de cada subagent, em JSONL, com prompt, comandos, resultados e relatório final.
+- Comparou com o `/export` da CLI que eu testei, que mostra só a resposta final de cada subagent.
+- Encontrou o e-mail do candidato em 2 trechos da transcrição principal. Ele vem do contexto injetado pelo app e precisa ser removido antes de publicar.
+- Registrou a exportação dupla no `CLAUDE.md` e nesta declaração.
+
+**O que eu fiz:**
+- Testei o `/export` na Claude CLI com dois subagents.
+- Decidi usar as duas exportações.
+
+### SPEC-001 — Só CONFIRMED é faturável (issue #1, PR #7)
+**O que a IA fez:**
+- **Antes de começar:** como orquestradora, conferiu que a worktree estava limpa, enviou o commit pendente e criou o branch `spec/001-status-faturavel`.
+- **Implementação:** disparou um subagent implementador (`general-purpose` seguindo `implementador.md`):
+  - escreveu `tests/test_status_policy_extra.py` com 5 testes;
+  - comprovou o RED, com 3 falhas: NO_SHOW, status desconhecido e a CLI com 4 noites em vez de 1;
+  - aplicou a correção em `status_policy.py` (`status == "CONFIRMED"`);
+  - comprovou o GREEN: 11 testes passando e 4 falhando, essas das specs 002 a 004; ruff limpo; schema 5/5;
+  - registrou as evidências na spec.
+- **Revisão:** disparou um subagent revisor (`general-purpose` seguindo `revisor.md`):
+  - conferiu o escopo do diff e que nenhum arquivo proibido mudou;
+  - conferiu o RED antes do GREEN e o DoD;
+  - na amostra de validação, as contagens batem com o README (12/9/2/1);
+  - veredito: APROVADO, com 2 apontamentos de baixa severidade.
+- **Fechamento:**
+  - conferiu o diff e o pytest de forma independente;
+  - resolveu os apontamentos e marcou a spec como `done`;
+  - atualizou `specs/README.md` e `entrega/README-ENTREGA.md`;
+  - fez o commit e o push e abriu o PR #7.
+- **Merge:**
+  - analisou a CI: guarda, ruff, schema e testes da spec passaram;
+  - a "Suíte completa" falhou só nos 4 testes das specs abertas (falha esperada);
+  - fez o merge com `--delete-branch` e confirmou que a issue #1 foi fechada.
+
+**O que eu fiz:**
+- Autorizei o início da implementação.
+- Defini a condição para o merge: só se passasse nos testes e critérios de aceite da spec.
+- Decidi fazer o merge da 001 antes de iniciar a 002.
+
+### SPEC-002 a 006
 _A preencher._
 
 ## Sessões exportadas
