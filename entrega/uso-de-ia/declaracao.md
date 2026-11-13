@@ -333,7 +333,7 @@
 ## Resumo da divisão de trabalho
 - **IA (Claude Code, Opus 5.5):**
   - escreveu toda a documentação de processo (`CLAUDE.md`, subagents, template e registro de specs, `docs/SCHEMA.md`, `llm.txt`, CI);
-  - orquestrou 14 execuções de subagents (3 investigadores, implementadores e revisores das 6 specs, e 1 ajuste pós-revisão);
+  - orquestrou 15 subagents (3 investigadores, mais 1 implementador e 1 revisor por spec) e 1 retomada de implementador para o ajuste pós-revisão;
   - escreveu as specs;
   - por meio dos subagents, escreveu os testes e as correções;
   - conferiu cada entrega e operou o git e o GitHub (issues, PRs, merges).
