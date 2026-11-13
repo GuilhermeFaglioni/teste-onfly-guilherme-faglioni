@@ -328,7 +328,7 @@
 **O que eu fiz:**
 - Autorizei a finalização.
 - Revisei a documentação de entrega. _(pendente)_
-- Gerei o `/export` da sessão principal (`sessao-01.md`). _(pendente)_
+- Confirmei que o export do app contém a sessão inteira (principal e subagents) e o defini como fonte única, já que o `/export` não funciona no Claude Desktop App.
 
 ## Resumo da divisão de trabalho
 - **IA (Claude Code, Opus 5.5):**
@@ -345,8 +345,19 @@
   - decidi pontos específicos, como devolver o apontamento da SPEC-004 ao implementador e manter o e-mail no export.
 
 ## Sessões exportadas
-Duas exportações complementares, em `entrega/uso-de-ia/`:
-- `sessao-01.md` — `/export` do Claude Code: sessão principal (orquestradora) em texto legível. Não inclui subagents.
-- `sessao-01-completa/` — export do app (menu da sessão › Export), descompactado: transcrição principal e de cada subagent em JSONL nativo (`subagents/agent-<id>.jsonl` + `.meta.json` com tipo e tarefa).
+**Fonte única:** `sessao-01-completa/`, o export do Claude Desktop App (menu da sessão › Export, zip descompactado sem alterações).
 
-Subagents incluídos no export completo: 3 investigadores (Fase 2) e os implementadores e revisores das specs 001 a 006 (Fase 3).
+Ele contém:
+- `transcript.jsonl`: a conversa completa da sessão principal (orquestradora), com cada prompt, resposta, chamada de ferramenta e resultado.
+- `<sessão>/subagents/agent-<id>.jsonl`: a conversa completa de cada um dos **15 subagents**, com prompt recebido, comandos, resultados e relatório final (`SubagentHandback`).
+- `<sessão>/subagents/agent-<id>.meta.json`: tipo do agente (`general-purpose`, `implementador`, `revisor`), tarefa e status.
+- `metadata.json` e `local-session-state.json`: metadados da sessão.
+
+Subagents incluídos:
+- 3 investigadores (Fase 2);
+- 1 implementador e 1 revisor por spec, de 001 a 006 (Fase 3);
+- a retomada do implementador da SPEC-004 está no mesmo arquivo dele.
+
+**Por que não há `/export`:** o comando `/export` não funciona no Claude Desktop App, onde a sessão foi conduzida. Num teste à parte na Claude CLI, ele também mostrou apenas a resposta final de cada subagent, sem o trabalho interno. O export do app foi verificado e cobre a sessão inteira, então ficou como fonte única.
+
+O formato é JSONL, que é o nativo da ferramenta e é aceito pelo README do teste.

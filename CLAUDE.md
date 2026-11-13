@@ -60,8 +60,8 @@ Só nesses casos o orquestrador intervém diretamente (ajusta spec, redivide tar
 - Uma spec = um defeito (ou conjunto indivisível) = um commit.
 - Achados de subagent são hipóteses até haver teste RED.
 - Specs nunca são apagadas; specs abandonadas ficam `cancelled` com motivo.
-- Exportação de sessões (ao final, em `entrega/uso-de-ia/`): `/export` da sessão principal → `sessao-NN.md`
-  **e** export do app (menu da sessão › Export, zip com subagents) descompactado em `sessao-NN-completa/`.
+- Exportação de sessões (em `entrega/uso-de-ia/`): fonte única = export do Claude Desktop App (menu da sessão › Export,
+  zip com sessão principal + subagents) descompactado em `sessao-NN-completa/`. O `/export` não funciona no Desktop App e não é usado.
   `entrega/uso-de-ia/declaracao.md` registra o que a IA fez vs. o candidato.
 
 ## CI
