@@ -45,4 +45,4 @@ def test_fewer_hotels_than_top(tmp_path):
         ],
         top=5,
     )
-    assert sorted(_ids(report)) == ["H01", "H02"]
+    assert _ids(report) == ["H02", "H01"]
