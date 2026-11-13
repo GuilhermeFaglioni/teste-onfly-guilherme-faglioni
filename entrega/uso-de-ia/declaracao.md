@@ -112,10 +112,52 @@
 
 **O que eu fiz:**
 - Autorizei o início da implementação.
+- Acompanhei o processo de implementação feito pelos subagents.
+- Fiz o code review do PR #7 antes de permitir o merge.
 - Defini a condição para o merge: só se passasse nos testes e critérios de aceite da spec.
 - Decidi fazer o merge da 001 antes de iniciar a 002.
 
-### SPEC-002 a 006
+### Export parcial da sessão
+**O que a IA fez:**
+- Exportou a sessão e a descompactou em `sessao-01-completa/`.
+- Num primeiro momento removeu o e-mail. Depois reverteu e manteve o export original.
+- Fez o commit e o push.
+
+**O que eu fiz:**
+- Pedi o export.
+- Decidi manter o e-mail no export.
+- Autorizei o commit.
+
+### SPEC-002 — Noites pela diferença de datas (issue #2, PR #8)
+**O que a IA fez:**
+- **Antes de começar:** criou o branch `spec/002-noites-nao-inclusivas` a partir de `main`, já com a 001.
+- **Implementação:** disparou um subagent implementador (`general-purpose` seguindo `implementador.md`):
+  - escreveu `tests/test_stay_calculator_extra.py` com 5 testes;
+  - comprovou o RED, com 4 falhas: -28, -29, -56 e -27;
+  - aplicou a correção em `stay_calculator.py` (`(checkout - checkin).days * rooms`);
+  - comprovou o GREEN: 17 testes passando e 3 falhando, essas das specs 003 e 004; ruff limpo.
+- **Revisão:** disparou um subagent revisor (`general-purpose` seguindo `revisor.md`):
+  - conferiu o escopo do diff;
+  - na amostra de validação, `total_room_nights` 28 e `by_month` 25/3 batem com o README;
+  - veredito: APROVADO.
+- **Fechamento:**
+  - conferiu o diff e o pytest de forma independente;
+  - marcou a spec como `done`;
+  - atualizou `specs/README.md` e `entrega/README-ENTREGA.md`;
+  - fez o commit e o push e abriu o PR #8.
+- **Auto-fix:**
+  - analisou o evento de falha da CI: só a "Suíte completa", nos 3 testes das specs abertas;
+  - não alterou nada, para não misturar specs no PR;
+  - após autorização, fez o merge e confirmou que a issue #2 foi fechada.
+- **Subagents nativos:** registrou que, depois do merge, os subagents de `.claude/agents/` passaram a ficar disponíveis como tipos nativos nesta sessão.
+
+**O que eu fiz:**
+- Autorizei o início da spec.
+- Acompanhei o processo de implementação feito pelos subagents.
+- Fiz o code review do PR #8 antes de permitir o merge.
+- Autorizei o merge com o mesmo critério da 001.
+
+### SPEC-003 a 006
 _A preencher._
 
 ## Sessões exportadas
