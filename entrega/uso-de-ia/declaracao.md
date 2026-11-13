@@ -330,6 +330,33 @@
 - Revisei a documentação de entrega. _(pendente)_
 - Confirmei que o export do app contém a sessão inteira (principal e subagents) e o defini como fonte única, já que o `/export` não funciona no Claude Desktop App.
 
+## Fase 5 — Validação final e decisões de formato
+
+**O que a IA fez:**
+- Verificou o conteúdo do export do Desktop App:
+  - transcrição principal completa;
+  - 15 subagents, cada um com prompt, chamadas de ferramenta e resultados pareados, e relatório final.
+- Com base nisso, atualizou `CLAUDE.md` e esta declaração para usar esse export como fonte única.
+- Rodou `pytest -q` (37 passed), `ruff` e a CLI na amostra e no dataset completo.
+- Exibiu as saídas lado a lado com o esperado do README: a amostra bate em todos os campos. No dataset completo, conferiu a consistência interna (contagens, soma de noites e média).
+- **Pushback sobre 3 mudanças pedidas:** o candidato pediu três mudanças no JSON:
+  - dinheiro sem aspas;
+  - noites como "X noites";
+  - soma de `by_month` igual a `total_amount_brl`.
+
+  A IA não alterou nada e apontou que as três violariam o contrato do README:
+  - dinheiro é string com 2 casas;
+  - `room_nights` é inteiro;
+  - o arredondamento acontece só na serialização, e cada grupo é arredondado separadamente.
+
+  Explicou que as duas primeiras eram efeito da formatação das tabelas no chat, não da saída da CLI. Explicou também que a diferença de R$ 0,01 na soma dos meses do dataset completo (396170.01 vs 396170.00) é consequência esperada da regra de arredondamento. Propôs alternativas que não quebram o contrato.
+
+**O que eu fiz:**
+- Defini o export do Desktop App como fonte única, porque o `/export` não funciona no app.
+- Mantive pendente a revisão da documentação de entrega.
+- Pedi a execução dos testes e da CLI e conferi os resultados com o esperado.
+- Questionei o formato de dinheiro, de noites e a soma de `by_month`. Depois da explicação, confirmei que as diferenças eram de formatação no chat e decidi **manter o código como está**, sem mudanças.
+
 ## Resumo da divisão de trabalho
 - **IA (Claude Code, Opus 5.5):**
   - escreveu toda a documentação de processo (`CLAUDE.md`, subagents, template e registro de specs, `docs/SCHEMA.md`, `llm.txt`, CI);
