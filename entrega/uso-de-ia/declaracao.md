@@ -197,7 +197,51 @@
 - Fiz o code review do PR #9 antes de permitir o merge.
 - Autorizei o merge.
 
-### SPEC-004 a 006
+### Atualização da declaração e do export (antes da SPEC-004)
+**O que a IA fez:**
+- Registrou a SPEC-003.
+- Refez o export da sessão (principal mais 9 subagents) e fez o commit e o push.
+
+**O que eu fiz:**
+- Pedi o export e a atualização da declaração antes de iniciar a spec.
+
+### SPEC-004 — top_hotels por total desc e hotel_id asc (issue #4, PR #10)
+**O que a IA fez:**
+- **Antes de começar:** criou o branch `spec/004-ordenacao-top-hotels` e, antes de disparar o implementador, corrigiu duas coisas na spec:
+  - a previsão de `test_regression_report`, que já passava desde a 003;
+  - a referência de linha do defeito (`report_builder.py:91`).
+- **Implementação:** o subagent nativo `implementador`:
+  - escreveu `tests/test_top_hotels_extra.py`;
+  - comprovou o RED: 2 testes novos e o `test_top_hotels` fornecido falhando;
+  - aplicou a correção com a chave `(-total, hotel_id)`;
+  - comprovou o GREEN: **26 testes passando (100%)**;
+  - na amostra, `top_hotels` bate com o README.
+- **Desvio registrado pelo implementador:** o teste de empate ganhou um terceiro hotel, porque só com H01 e H02 empatados não haveria RED.
+- **Revisão:** o subagent nativo `revisor`:
+  - validou o desvio: o teste também pegaria uma correção ingênua com `reverse=True`;
+  - na amostra, o relatório bate integralmente com o README (summary, `by_month` e `top_hotels`);
+  - no dataset completo, a CLI sai com código 0 (`total_reservations` 200 até a SPEC-005);
+  - veredito: APROVADO, com 3 apontamentos de baixa severidade.
+- **Fechamento:**
+  - atualizou a tabela da seção 6 da spec;
+  - marcou a spec como `done`;
+  - atualizou `specs/README.md` e `entrega/README-ENTREGA.md`;
+  - abriu o PR #10.
+  - O apontamento 2 (`test_fewer_hotels_than_top` não verificava a ordem) ficou inicialmente sem aplicar, com justificativa.
+- **Ajuste pós-revisão:** a pedido do candidato, devolveu o apontamento ao **mesmo** implementador (retomado com contexto) no mesmo branch. Ele:
+  - alterou o teste para verificar a ordem;
+  - provou o RED recolocando temporariamente a chave antiga, reverteu e confirmou `src/` idêntico ao HEAD.
+  - A IA conferiu, anotou a seção 8 da spec para manter a coerência e enviou o commit ao PR #10.
+- **Merge:** a CI ficou **toda verde** pela primeira vez. A IA fez o merge e confirmou que a issue #4 foi fechada.
+
+**O que eu fiz:**
+- Autorizei o início da spec.
+- Acompanhei o processo de implementação feito pelos subagents.
+- Questionei qual apontamento do revisor ficou sem aplicar e decidi devolvê-lo ao implementador.
+- Fiz o code review do PR #10, inclusive do ajuste, antes de permitir o merge.
+- Autorizei o merge.
+
+### SPEC-005 e 006
 _A preencher._
 
 ## Sessões exportadas
