@@ -241,7 +241,45 @@
 - Fiz o code review do PR #10, inclusive do ajuste, antes de permitir o merge.
 - Autorizei o merge.
 
-### SPEC-005 e 006
+### Atualização da declaração e do export (antes da SPEC-005)
+**O que a IA fez:**
+- Registrou a SPEC-004.
+- Refez o export da sessão (principal mais 11 subagents) e fez o commit e o push.
+
+**O que eu fiz:**
+- Pedi o export e a atualização da declaração antes de iniciar a spec.
+
+### SPEC-005 — Ler todas as reservas do CSV (issue #5, PR #11)
+**O que a IA fez:**
+- **Antes de começar:** criou o branch `spec/005-leitura-sem-limite-linhas` e conferiu que a linha do defeito citada na spec estava correta.
+- **Implementação:** o subagent nativo `implementador`:
+  - escreveu `tests/test_reservation_repository_extra.py` com 250 linhas sintéticas via CLI e uma leitura do dataset real;
+  - comprovou o RED: `200 == 250` e `200 == 300`;
+  - removeu o corte de 200 linhas;
+  - comprovou o GREEN: 28 testes passando;
+  - rodou a CLI no dataset completo.
+- **Revisão:** o subagent nativo `revisor`:
+  - confirmou que `data/` ficou intacto e que não há outro corte de leitura em `src/`;
+  - **recalculou o dataset completo de forma independente** (csv mais Decimal, sem o código da CLI) e obteve valores idênticos aos da CLI:
+    - 300 reservas: 235 confirmadas, 31 canceladas e 34 no-show;
+    - 1347 noites;
+    - total de 396170.00 e média de 294.11;
+  - confirmou que a amostra do README continua batendo integralmente;
+  - veredito: APROVADO.
+- **Fechamento:**
+  - ajustou a descrição de um teste na seção 6 da spec (observação do revisor);
+  - marcou a spec como `done`;
+  - atualizou `specs/README.md` e `entrega/README-ENTREGA.md`;
+  - abriu o PR #11.
+- **Merge:** com a CI toda verde, fez o merge e confirmou que a issue #5 foi fechada. Com isso, os 5 defeitos estão corrigidos.
+
+**O que eu fiz:**
+- Autorizei o início da spec.
+- Acompanhei o processo de implementação feito pelos subagents.
+- Fiz o code review do PR #11 antes de permitir o merge.
+- Autorizei o merge.
+
+### SPEC-006
 _A preencher._
 
 ## Sessões exportadas
