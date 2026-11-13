@@ -279,12 +279,74 @@
 - Fiz o code review do PR #11 antes de permitir o merge.
 - Autorizei o merge.
 
-### SPEC-006
-_A preencher._
+### Atualização da declaração e do export (antes da SPEC-006)
+**O que a IA fez:**
+- Registrou a SPEC-005.
+- Refez o export da sessão (principal mais 13 subagents) e fez o commit e o push.
+
+**O que eu fiz:**
+- Pedi o export e a atualização da declaração antes de iniciar a spec.
+
+### SPEC-006 — Testes de contrato da CLI e exatidão (issue #6, PR #12)
+**O que a IA fez:**
+- **Antes de começar:** criou o branch `spec/006-testes-contrato-cli`.
+- **Implementação:** o subagent nativo `implementador`:
+  - escreveu `tests/test_cli_contract_extra.py` com 9 testes:
+    - exit 0/2/1;
+    - `--top` 0, -1 e abc;
+    - half-up após a soma;
+    - mês do check-in;
+    - amostra completa do README.
+  - Todos passaram sem mutação, ou seja, não havia defeito oculto.
+  - Comprovou o **RED por mutação**: aplicou cada mutação no código, mostrou a falha e reverteu. No fim, `src/` ficou inalterado.
+  - Declarou 3 desvios da tabela da spec.
+- **Revisão:** o subagent nativo `revisor`:
+  - reproduziu 5 mutações numa cópia do código **fora do repositório**;
+  - conferiu os valores do teste da amostra com o README e verificou o determinismo;
+  - aceitou os desvios;
+  - veredito: APROVADO, com 2 apontamentos de baixa severidade.
+- **Fechamento:**
+  - corrigiu a formatação Markdown da seção 8 da spec (apontamento do revisor);
+  - marcou a spec como `done`;
+  - registrou os testes como "lacuna de cobertura" em `README-ENTREGA.md`;
+  - abriu o PR #12.
+- **Merge:** com a CI toda verde, fez o merge. Todas as issues (#1 a #6) ficaram fechadas.
+
+**O que eu fiz:**
+- Autorizei o início da spec.
+- Acompanhei o processo de implementação feito pelos subagents.
+- Fiz o code review do PR #12 antes de permitir o merge.
+- Autorizei o merge.
+
+## Fase 4 — Fechamento da entrega
+
+**O que a IA fez:**
+- Completou `entrega/README-ENTREGA.md`: como investigou, como validar, resultados da amostra e do dataset completo, e a saída final do `pytest` (37 passed) e do `ruff`.
+- Conferiu que os testes fornecidos, `data/reservas_hoteis.csv`, `data/taxas_cambio.csv` e `README.md` estão idênticos ao commit original.
+- Atualizou esta declaração e o export da sessão.
+
+**O que eu fiz:**
+- Autorizei a finalização.
+- Revisei a documentação de entrega. _(pendente)_
+- Gerei o `/export` da sessão principal (`sessao-01.md`). _(pendente)_
+
+## Resumo da divisão de trabalho
+- **IA (Claude Code, Opus 5.5):**
+  - escreveu toda a documentação de processo (`CLAUDE.md`, subagents, template e registro de specs, `docs/SCHEMA.md`, `llm.txt`, CI);
+  - orquestrou 14 execuções de subagents (3 investigadores, implementadores e revisores das 6 specs, e 1 ajuste pós-revisão);
+  - escreveu as specs;
+  - por meio dos subagents, escreveu os testes e as correções;
+  - conferiu cada entrega e operou o git e o GitHub (issues, PRs, merges).
+- **Eu:**
+  - defini a estratégia: orquestração com subagents, SDD + TDD, issues por spec, CI com preservação do schema e exportação dupla;
+  - aprovei as specs;
+  - acompanhei cada implementação;
+  - fiz o code review de todos os PRs (#7 a #12) antes de autorizar cada merge;
+  - decidi pontos específicos, como devolver o apontamento da SPEC-004 ao implementador e manter o e-mail no export.
 
 ## Sessões exportadas
-_Pendente._ Nenhuma sessão foi exportada até agora. Ao final do trabalho serão feitas duas exportações complementares, em `entrega/uso-de-ia/`:
+Duas exportações complementares, em `entrega/uso-de-ia/`:
 - `sessao-01.md` — `/export` do Claude Code: sessão principal (orquestradora) em texto legível. Não inclui subagents.
 - `sessao-01-completa/` — export do app (menu da sessão › Export), descompactado: transcrição principal e de cada subagent em JSONL nativo (`subagents/agent-<id>.jsonl` + `.meta.json` com tipo e tarefa).
 
-Subagents previstos: 3 investigadores (Fase 2) e os implementadores/revisores da Fase 3.
+Subagents incluídos no export completo: 3 investigadores (Fase 2) e os implementadores e revisores das specs 001 a 006 (Fase 3).
