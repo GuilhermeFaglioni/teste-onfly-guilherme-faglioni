@@ -157,7 +157,47 @@
 - Fiz o code review do PR #8 antes de permitir o merge.
 - Autorizei o merge com o mesmo critério da 001.
 
-### SPEC-003 a 006
+### Atualização da declaração e do export (antes da SPEC-003)
+**O que a IA fez:**
+- Registrou a SPEC-002 e os code reviews do candidato nesta declaração.
+- Refez o export da sessão (principal mais 7 subagents) e fez o commit e o push.
+
+**O que eu fiz:**
+- Pedi o export e a atualização da declaração.
+- Informei que fiz o code review dos PRs #7 e #8.
+
+### SPEC-003 — Câmbio por multiplicação em Decimal (issue #3, PR #9)
+**O que a IA fez:**
+- **Antes de começar:** criou o branch `spec/003-cambio-multiplicacao-decimal` a partir de `main`.
+- **Implementação:** pela primeira vez usou os subagents **nativos** `implementador` e `revisor`, com as permissões de ferramentas definidas em `.claude/agents/`. O implementador:
+  - escreveu `tests/test_currency_extra.py` com 3 testes;
+  - comprovou o RED, com 2 falhas: multiplicação e Decimal exato;
+  - aplicou a correção em `currency_converter.py` (`amount * rates[currency]`, sem float);
+  - comprovou o GREEN: 22 testes passando e 1 falhando, essa da spec 004; ruff limpo.
+- **Divergência da previsão:** o implementador relatou que `test_regression_report` passou antes do previsto pela spec.
+- **Revisão:** o revisor:
+  - confirmou que não sobrou `float` em `src/`;
+  - na amostra de validação, `total_amount_brl` 7566.00, `average_nightly_rate_brl` 270.21 e `by_month` batem com o README;
+  - explicou a divergência: o teste só verifica `summary`, e o câmbio era o último defeito que o afetava;
+  - veredito: APROVADO.
+- **Fechamento:**
+  - conferiu o diff e o pytest de forma independente;
+  - corrigiu a previsão errada na seção 5 da spec;
+  - marcou a spec como `done`;
+  - atualizou `specs/README.md` e `entrega/README-ENTREGA.md`;
+  - fez o commit e o push e abriu o PR #9.
+- **Merge:**
+  - conferiu a CI: só `test_top_hotels` falhou (esperado);
+  - fez o merge e confirmou que a issue #3 foi fechada;
+  - recebeu depois um evento atrasado do Auto-fix sobre o PR já mesclado e não fez nada.
+
+**O que eu fiz:**
+- Autorizei o início da spec.
+- Acompanhei o processo de implementação feito pelos subagents.
+- Fiz o code review do PR #9 antes de permitir o merge.
+- Autorizei o merge.
+
+### SPEC-004 a 006
 _A preencher._
 
 ## Sessões exportadas
